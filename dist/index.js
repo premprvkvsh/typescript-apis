@@ -1,14 +1,14 @@
 "use strict";
-function sumOfAge(user1, user2) {
-    return user1.age + user2.age;
-}
-;
-// Example usage
-const result = sumOfAge({
-    name: "prem",
-    age: 23
-}, {
-    name: "kunal",
-    age: 22
-});
-console.log(result); // Output: 41
+// // interface User {
+// //     id: string;
+// //     name: string;
+// //     age: string;
+// //     email: string;
+// //     password: string;
+// // };
+const users = {
+    "abc123": { age: 23, name: "John Doe" },
+    "xyz789": { age: 34, name: "Jane Doe" },
+};
+console.log(users["abc123"]); // Output: { id: 'abc123', name: 'John Doe' }
+users["abc123"].age;
