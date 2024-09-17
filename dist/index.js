@@ -7,6 +7,4 @@
 // //     password: string;
 // // };
 const handleEvent = (event) => {
-    console.log(`Handling event: ${event}`);
-};
-handleEvent("click"); // OK
+    console.log(`Handling event: 
