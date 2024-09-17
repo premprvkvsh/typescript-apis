@@ -69,11 +69,43 @@
 
 // exclude 
 
-type EventType = 'click' | 'scroll' | 'mousemove';
-type ExcludeEvent = Exclude<EventType, 'scroll'>; // 'click' | 'mousemove'
+// type EventType = 'click' | 'scroll' | 'mousemove';
+// type ExcludeEvent = Exclude<EventType, 'scroll'>; // 'click' | 'mousemove'
 
-const handleEvent = (event: ExcludeEvent) => {
-  console.log(`Handling event: ${event}`);
-};
+// const handleEvent = (event: ExcludeEvent) => {
+//   console.log(`Handling event: ${event}`);
+// };
 
-handleEvent("click"); // OK
+// handleEvent("click"); // OK
+
+// Type inference in Zod
+
+import { z } from 'zod';
+import express from "express";
+
+const app = express();
+
+// Define the schema for profile update
+const userProfileSchema = z.object({
+  name: z.string().min(1 ),
+  email: z.string().email(),
+  age: z.number().min(18).optional(),
+});
+
+type FinalUserSchema = z.infer<typeof userProfileSchema>;
+
+app.put("/user", (req, res) => {
+  const { success } = userProfileSchema.safeParse(req.body);
+  const updateBody = req.body; // how to assign a type to updateBody?
+
+  if (!success) {
+    res.status(411).json({});
+    return
+  }
+  // update database here
+  res.json({
+    message: "User updated"
+  })
+});
+
+app.listen(3000);
